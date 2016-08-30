@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">FileFusebulb</string>
+    <string name="select_language_text">Choose a language to start</string>
+    <string name="English">English</string>
+    <string name="Hindi">हिन्दी</string>
+    <string name="start">Start</string>
+    <string name="done">Done</string>
+    <string name="change_language">Change Language</string>
+    <string name="share_fusebulb">Share Fusebulb</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="share_app_message">Hey! Share this cool app I have found.</string>
+    <string name="communicate">Communicate</string>
+    <string name="test_big_string">
+        I love the Android platform. The platform is very flexible from
+        OS to app development aspects, and many people love
+        customizing their phone to show their personality. Because
+        Android is open-sourced, many phone manufacturers appeal
+        their own form-factor and customized OS theme. In order
+        to accommodate this, Android has a concept of Fragmentation to
+        support multiple screen sizes . However, this is somewhat painful
+        when it comes to design image resources. If the image has a wrong
+        DPI, then the image looks blurred, too pixelated, or small-scaled
+         DPI categories.></string>
+
+</resources>

@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:weightSum="1">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="8dp"
+        app:cardCornerRadius="2dp"
+        app:cardElevation="4dp"
+        app:cardUseCompatPadding="true">
+
+
+        <android.support.design.widget.CoordinatorLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/tour_img_thumbnail"
+                    android:layout_width="fill_parent"
+                    android:layout_height="200dp"
+                    android:background="#000000"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_fusebulb" />
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+
+                    <TextView
+                        android:id="@+id/tour_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginTop="36dp"
+                        android:text="Text"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textColor="@color/primary_text_color"
+                        android:textSize="@dimen/primary_text_size" />
+
+                    <!--<Button-->
+                    <!--android:id="@+id/tour_distance"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_below="@id/tour_title"-->
+                    <!--android:layout_marginLeft="16dp"-->
+                    <!--android:paddingLeft="8dp"-->
+                    <!--android:background="@drawable/button_tag"-->
+                    <!--android:drawableLeft="@drawable/ic_directions"-->
+                    <!--android:drawableStart="@drawable/ic_directions"-->
+                    <!--android:text="4 KMS"-->
+                    <!--android:textColor="@color/action_color" />-->
+
+                    <!--<Button-->
+                    <!--android:id="@+id/tour_preview"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_below="@id/tour_title"-->
+                    <!--android:layout_marginLeft="8dp"-->
+                    <!--android:layout_toRightOf="@id/tour_distance"-->
+                    <!--android:background="@drawable/button_tag"-->
+                    <!--android:drawableLeft="@drawable/ic_preview"-->
+                    <!--android:drawablePadding="@dimen/action_padding"-->
+                    <!--android:drawableStart="@drawable/ic_preview"-->
+                    <!--android:paddingLeft="8dp"-->
+                    <!--android:text="Preview"-->
+                    <!--android:textColor="@color/action_color" />-->
+
+                    <LinearLayout
+                        android:id="@+id/tour_overview"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/tour_title"
+                        android:orientation="vertical"
+                        android:visibility="visible">
+                        <TextView
+                            android:id="@+id/tour_overview_text"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:paddingBottom="16dp"
+                            android:paddingLeft="@dimen/secondary_text_right_left_padding"
+                            android:paddingRight="@dimen/secondary_text_right_left_padding"
+                            android:text="@string/test_big_string"
+                            android:textSize="@dimen/secondary_text_size" />
+
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@drawable/ic_direction_arrow"
+                            android:layout_gravity="center"
+                            android:layout_marginBottom="8dp"
+                            />
+
+                    </LinearLayout>
+                </RelativeLayout>
+
+
+            </LinearLayout>
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/showOverview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_fusebulb"
+                app:fabSize="normal"
+                app:layout_anchor="@id/tour_img_thumbnail"
+                app:layout_anchorGravity="bottom|center" />
+        </android.support.design.widget.CoordinatorLayout>
+
+
+        <!--<Button-->
+        <!--android:id="@+id/tour_price_tag"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!---->
+        <!--android:layout_marginRight="8dp"-->
+        <!--android:layout_marginTop="24dp"-->
+        <!--android:background="@drawable/button_tag"-->
+        <!--android:text="Free"-->
+        <!--android:textColor="@color/secondary_text_color" />-->
+
+        <!--<TextView-->
+        <!--android:id="@+id/tour_type"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@id/tour_title"-->
+        <!--android:paddingLeft="@dimen/secondary_text_right_left_padding"-->
+        <!--android:text="Attraction"-->
+        <!--android:textSize="@dimen/secondary_text_size" />-->
+
+
+        <!--<Button-->
+        <!--android:id="@+id/tour_distance"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@id/tour_type"-->
+        <!--android:layout_marginLeft="16dp"-->
+        <!--android:background="@drawable/btn_border_less"-->
+        <!--android:drawableLeft="@drawable/ic_directions"-->
+        <!--android:drawableStart="@drawable/ic_directions"-->
+        <!--android:text="4 KMS"-->
+        <!--android:textColor="@color/action_color" />-->
+
+        <!--<Button-->
+        <!--android:id="@+id/tour_preview"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_below="@id/tour_type"-->
+        <!--android:layout_marginLeft="8dp"-->
+        <!--android:layout_toRightOf="@id/tour_distance"-->
+        <!--android:background="@drawable/btn_border_less"-->
+        <!--android:drawableLeft="@drawable/ic_preview"-->
+        <!--android:drawablePadding="@dimen/action_padding"-->
+        <!--android:drawableStart="@drawable/ic_preview"-->
+        <!--android:paddingLeft="8dp"-->
+        <!--android:text="Preview"-->
+        <!--android:textColor="@color/action_color" />-->
+
+        <!--<Button-->
+        <!--android:id="@+id/tour_overview_arrow_down_btn"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_below="@id/tour_type"-->
+        <!--android:background="@drawable/btn_border_less"-->
+        <!--android:drawableRight="@drawable/ic_show_more_arrow"-->
+        <!--android:padding="@dimen/action_padding" />-->
+
+
+        <!--<Button-->
+        <!--android:id="@+id/tour_overview_arrow_up_btn"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignParentRight="true"-->
+        <!--android:layout_below="@id/tour_type"-->
+        <!--android:background="@drawable/btn_border_less"-->
+        <!--android:drawableRight="@drawable/ic_show_less_arrow"-->
+        <!--android:padding="@dimen/action_padding" />-->
+
+
+    </android.support.v7.widget.CardView>
+</LinearLayout>
