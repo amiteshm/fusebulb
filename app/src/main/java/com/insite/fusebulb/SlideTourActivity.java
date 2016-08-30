@@ -6,6 +6,8 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -15,20 +17,19 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ImageButton;
-import android.widget.ImageView;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.insite.fusebulb.Adapters.StopListAdapter;
+
 import com.insite.fusebulb.Helpers.Downloader;
 import com.insite.fusebulb.Models.Slide;
+import com.insite.fusebulb.Models.SlideView;
 import com.insite.fusebulb.Models.TourStop;
 import com.insite.fusebulb.Parsers.SlideParser;
 import com.insite.fusebulb.Parsers.TourParser;
-import com.insite.fusebulb.Support.UserPreference;
+
 
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
@@ -36,25 +37,25 @@ import java.util.concurrent.ExecutionException;
 /**
  * Created by amiteshmaheshwari on 28/08/16.
  */
-public class SlideTourActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, AdapterView.OnItemClickListener {
-    DrawerLayout drawer;
+public class SlideTourActivity extends FragmentActivity {
+    //DrawerLayout drawer;
     private final String TAG = "SlideTourActivity";
     private ListView listViewDrawer;
     private ArrayList<TourStop> stopList;
     float x1, x2, y1, y2;
     static final int MIN_DISTANCE = 70;
+
     TextView descriptionView;
-
     Downloader downloader;
-
     TourStop currStop;
     Slide currSlide;
 
     int currStopIndex;
     int currSlideIndex;
 
-    ImageView slideBackground;
-    TextView slideTitle, slideDescription;
+    SlideView slideView;
+    Animation slideInLeftAnimation, slideInRightAnimation;
+    FragmentManager fm = getSupportFragmentManager();
 
 
     private Downloader getDownloader() {
@@ -85,12 +86,6 @@ public class SlideTourActivity extends AppCompatActivity implements NavigationVi
 
     }
 
-    private void displaySlide(Slide slide) {
-        slideTitle.setText(slide.getTitle());
-        slideDescription.setText(slide.getDescription());
-        slideBackground.setBackground(Drawable.createFromPath(slide.getPicturePath()));
-    }
-
 
     private void setCurrentStop(int index) {
         if (index >= stopList.size()) {
@@ -102,8 +97,11 @@ public class SlideTourActivity extends AppCompatActivity implements NavigationVi
         }
     }
 
+
     private void setPreviouSlide() {
+
         if (currSlideIndex == 0) {
+
 
         } else {
             try {
@@ -114,11 +112,13 @@ public class SlideTourActivity extends AppCompatActivity implements NavigationVi
                 e.printStackTrace();
             }
         }
-        displaySlide(currSlide);
+        if(currSlide != null){
+            slideView.setView(currSlide, slideInRightAnimation);
+        }
     }
 
     private void setNextSlide() {
-        if (currSlideIndex + 1 == currStop.getMediaSize()) {
+        if (currSlideIndex + 1 > currStop.getMediaSize()) {
             setCurrentStop(currStopIndex + 1);
         }
         if (currStop == null) {
@@ -132,7 +132,7 @@ public class SlideTourActivity extends AppCompatActivity implements NavigationVi
                 e.printStackTrace();
             }
         }
-        displaySlide(currSlide);
+        slideView.setView(currSlide, slideInLeftAnimation);
     }
 
     private String getSlidePath(TourStop stop, int slideIndex) {
@@ -144,55 +144,41 @@ public class SlideTourActivity extends AppCompatActivity implements NavigationVi
     }
 
     private void initializeView() {
-        Toolbar toolbar = (Toolbar) findViewById(R.id.slide_tour_toolbar);
-        setSupportActionBar(toolbar);
+//        Toolbar toolbar = (Toolbar) findViewById(R.id.slide_tour_toolbar);
+//        setSupportActionBar(toolbar);
 
-        drawer = (DrawerLayout) findViewById(R.id.slide_tour_drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-
-        toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.slide_tour_nav_view);
-        View hView = navigationView.getHeaderView(0);
-
+//        drawer = (DrawerLayout) findViewById(R.id.slide_tour_drawer_layout);
+//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+//                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+//        drawer.addDrawerListener(toggle);
 //
-//        listViewDrawer = (ListView) findViewById(R.id.slideTour_stoplistView_rightDrawer);
-//        if (listViewDrawer != null) {
-//            StopListAdapter clipListAdapter = new StopListAdapter(this, stopList);
-//            listViewDrawer.setAdapter(clipListAdapter);
-//            listViewDrawer.setOnItemClickListener(this);
-//        }
+//        toggle.syncState();
+//
+//        NavigationView navigationView = (NavigationView) findViewById(R.id.slide_tour_nav_view);
+//        View hView = navigationView.getHeaderView(0);
 
-        navigationView.setNavigationItemSelectedListener(this);
+
+        //navigationView.setNavigationItemSelectedListener(this);
+
 
         descriptionView = (TextView) findViewById(R.id.slide_tour_slideDescription);
         findViewById(R.id.fabBulb).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (descriptionView.getVisibility() == View.VISIBLE) {
-                    bringOutView(descriptionView);
-                } else {
-                    bringInView(descriptionView);
-                }
+                slideView.transition();
             }
         });
 
-        slideBackground = (ImageView) findViewById(R.id.slide_tour_slideBackground);
-        slideTitle = (TextView) findViewById(R.id.slide_tour_slideTitle);
-        slideDescription = (TextView) findViewById(R.id.slide_tour_slideDescription);
+        slideInLeftAnimation= AnimationUtils.loadAnimation(getApplicationContext(),
+                R.anim.slide_in_right);
+        slideInRightAnimation= AnimationUtils.loadAnimation(getApplicationContext(),
+                R.anim.slide_in_left);
+
+        slideView = new SlideView(findViewById(R.id.slide_tour));
 
 
     }
 
-    private void bringInView(View myView) {
-        myView.setVisibility(View.VISIBLE);
-    }
-
-    private void bringOutView(final View myView) {
-        myView.setVisibility(View.GONE);
-    }
 
     public boolean onTouchEvent(MotionEvent touchevent) {
         switch (touchevent.getAction()) {
@@ -221,7 +207,6 @@ public class SlideTourActivity extends AppCompatActivity implements NavigationVi
                 } else if (Math.abs(deltaY) > MIN_DISTANCE) {
                     swipeUp();
                 }
-
                 break;
             }
         }
@@ -230,42 +215,43 @@ public class SlideTourActivity extends AppCompatActivity implements NavigationVi
 
     public void swipeLeft() {
         //Toast.makeText(this, "SwipeLeft--------------", Toast.LENGTH_LONG).show();
-        Log.d(TAG, "SwipeLeft--------------");
-        setPreviouSlide();
+        setNextSlide();
     }
 
     public void swipeRight() {
         //Toast.makeText(this, "SwipeLeft--------------", Toast.LENGTH_LONG).show();
         Log.d(TAG, "--------------SwipeRight");
-        setNextSlide();
+        setPreviouSlide();
+
     }
 
     public void swipeDown() {
-        bringOutView(descriptionView);
+        //bringInView(descriptionView);
+        slideView.transition();
     }
 
     public void swipeUp() {
-        bringInView(descriptionView);
+        slideView.transition();
     }
 
 
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_close) {
-            drawer.closeDrawer(GravityCompat.START);
-
-        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
-
-    @Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-    }
+//    @Override
+//    public boolean onNavigationItemSelected(MenuItem item) {
+//        // Handle navigation view item clicks here.
+//        int id = item.getItemId();
+//
+//        if (id == R.id.nav_close) {
+//            drawer.closeDrawer(GravityCompat.START);
+//
+//        }
+//
+//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+//        drawer.closeDrawer(GravityCompat.START);
+//        return true;
+//    }
+//
+//    @Override
+//    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+//
+//    }
 }

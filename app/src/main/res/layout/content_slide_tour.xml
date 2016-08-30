@@ -15,6 +15,7 @@
 
 
     <LinearLayout
+        android:id="@+id/slide_tour_contentView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center"
@@ -44,7 +45,7 @@
             android:paddingTop="@dimen/secondary_text_bottom_padding"
             android:paddingBottom="@dimen/primary_text_top_padding"
             android:text="In this equation, a and w are the amplitude and frequency values and t is the time. The equation contains a cosine function that causes the periodic wobbles during the animation. In order to reduce its amplitude with time we multiply the cosine by an exponential function. The following graph shows that the animation overshoots above the value 1 first and then settles closer to it."
-            android:visibility="gone"
+
             android:src="@android:drawable/arrow_up_float" />
 
         <android.support.design.widget.FloatingActionButton

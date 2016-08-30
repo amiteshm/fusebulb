@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:id="@+id/section_slidePrimaryAction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/primary_text_left_right_padding"
+            android:paddingTop="90dp">
+
+            <ImageView
+                android:id="@+id/icon_slidePrimaryAction"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_direction_arrow" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/primaryText_slidePrimaryAction"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="8dp"
+                    android:paddingLeft="@dimen/primary_text_left_right_padding"
+                    android:text="Qutub Minar"
+                    android:textColor="@color/primary_text_color"
+                    android:textSize="@dimen/primary_text_size" />
+
+                <TextView
+                    android:id="@+id/secondaryText_slidePrimaryAction"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/secondary_text_bottom_padding"
+                    android:paddingLeft="@dimen/primary_text_left_right_padding"
+                    android:text="Show directions"
+                    android:textColor="@color/secondary_text_color"
+                    android:textSize="@dimen/secondary_text_size" />
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:layout_below="@id/section_slidePrimaryAction"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:background="#000000" />
+
+
+        <Button
+            android:id="@+id/btn_slideSecondaryAction"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="16dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/btn_border_less"
+            android:gravity="center"
+            android:padding="8dp"
+            android:text="Skip" />
+    </RelativeLayout>
+</LinearLayout>

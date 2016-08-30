@@ -13,7 +13,6 @@ public class TourStop {
     private int mediaSize;
     private String tourSource;
 
-
     public TourStop() {
 
     }

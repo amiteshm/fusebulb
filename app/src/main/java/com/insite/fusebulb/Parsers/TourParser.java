@@ -30,7 +30,6 @@ public class TourParser extends Parser {
     private static final String XML_TOUR_LON = "lon";
     private static final String XML_TOUR_LAT = "lat";
 
-
     private static final String TAG = "TourParser";
     private Context context;
     private Downloader downloader;
