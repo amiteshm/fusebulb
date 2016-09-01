@@ -14,6 +14,7 @@ import android.util.Xml;
 import com.insite.fusebulb.Adapters.TourCardAdapter;
 import com.insite.fusebulb.Helpers.Downloader;
 import com.insite.fusebulb.Models.Tour;
+import com.insite.fusebulb.Support.UserPreference;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -26,15 +27,8 @@ import java.util.ArrayList;
 
 public class CityParser extends Parser {
 
-//    private static final String XML_TOUR_ID = "id";
-//    private static final String XML_TOUR_NAME = "name";
     private static final String XML_TOUR_LON =  "lon";
     private static final String XML_TOUR_LAT =  "lat";
-//    private static final String XML_TOUR_MEDIA_TYPE = "tour_type";
-//    private static final String XML_TOUR_TYPE = "type";
-//    private static final String XML_TOUR_PRICE = "rate";
-//    private static final String XML_TOUR_SIZE = "size";
-
 
     private static final String TAG = "CityParser";
     private Context context;
@@ -42,17 +36,16 @@ public class CityParser extends Parser {
     private String tour_source;
     private RecyclerView tourRecyclerView;
     private ProgressDialog progDailog;
-    private String languagePref;
+    private UserPreference.Language languagePref;
     private MediaPlayer previewPlayer;
 
 
-    public CityParser(Context app_context, String language, MediaPlayer mp, String tour_source_path, RecyclerView recyclerView){
+    public CityParser(Context app_context, UserPreference.Language language, String tour_source_path, RecyclerView recyclerView){
         context = app_context;
         downloader = new Downloader(context);
         tour_source = tour_source_path;
         tourRecyclerView = recyclerView;
         this.languagePref = language;
-        this.previewPlayer = mp;
     }
 
 
@@ -90,7 +83,7 @@ public class CityParser extends Parser {
         super.onPostExecute(result);
         progDailog.dismiss();
         //TODO
-        tourRecyclerView.setAdapter(new TourCardAdapter(context, languagePref, previewPlayer, result));
+        tourRecyclerView.setAdapter(new TourCardAdapter(context, languagePref, result));
     }
 
     public ArrayList<Tour> parseCityTours(Context context, InputStream in) throws XmlPullParserException, IOException {

@@ -4,12 +4,10 @@ package com.insite.fusebulb;
  * Created by amiteshmaheshwari on 26/08/16.
  */
 
-
 import android.content.res.Resources;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -19,32 +17,21 @@ import android.support.v7.widget.Toolbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.MenuItem;
 import android.content.Intent;
-
-//import com.fusebulb.sidebar.Parser.CityParser;
-
 import com.insite.fusebulb.Parsers.CityParser;
 import com.insite.fusebulb.Support.UserPreference;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-
-    private UserPreference userSettings;
-    private String userLanguage;
     private DrawerLayout drawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        userSettings = new UserPreference();
-        userLanguage = getUserLanguagePref();
-        if (userLanguage == null || userLanguage.equals("")) {
-            Intent userSettingIntent = new Intent(this, UserSettingsActivity.class);
-            startActivity(userSettingIntent);
-        }
-
         setContentView(R.layout.activity_main);
+        initializeView();
+    }
 
-        // MENU START
+    private void initializeView(){
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -55,36 +42,37 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toggle.syncState();
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        View hView = navigationView.getHeaderView(0);
-
         navigationView.setNavigationItemSelectedListener(this);
+    }
 
-//        //MENU END
-        RecyclerView cityRecyclerView;
-        cityRecyclerView = (RecyclerView) findViewById(R.id.tour_list_view);
-        cityRecyclerView.setHasFixedSize(true);
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
-        cityRecyclerView.setLayoutManager(mLayoutManager);
+    @Override
+    protected void onStart(){
+        super.onStart();
+        UserPreference userSettings = new UserPreference();
+        UserPreference.Language userLanguage = userSettings.getUserLanguage(this);
+        if (userLanguage == null) {
+            Intent userSettingIntent = new Intent(this, UserSettingsActivity.class);
+            startActivity(userSettingIntent);
+        } else{
+            RecyclerView cityRecyclerView;
+            cityRecyclerView = (RecyclerView) findViewById(R.id.tour_list_view);
+            cityRecyclerView.setHasFixedSize(true);
+            LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
+            cityRecyclerView.setLayoutManager(mLayoutManager);
 
-        MediaPlayer mediaPlayer = new MediaPlayer();
-        CityParser cityParser = new CityParser(this, getUserLanguagePref(), mediaPlayer, "delhi_tours.xml", cityRecyclerView);
-        cityParser.execute();
-
+            CityParser cityParser = new CityParser(this, userSettings.getUserLanguage(this),"delhi_tours.xml", cityRecyclerView);
+            cityParser.execute();
+        }
     }
 
     @Override
     public void onBackPressed() {
-//        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-//        if (drawer.isDrawerOpen(GravityCompat.START)) {
-//            drawer.closeDrawer(GravityCompat.START);
-//        } else {
-//            super.onBackPressed();
-//        }
-    }
-
-
-    public String getUserLanguagePref() {
-        return userSettings.getUserLanguage(this);
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
+            drawer.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
     }
 
     @Override

@@ -2,27 +2,65 @@ package com.insite.fusebulb.Models;
 
 import android.location.Location;
 
-import java.io.File;
-
 /**
  * Created by amiteshmaheshwari on 28/08/16.
  */
 public class TourStop {
     private String name;
+    private String description;
     private Location location;
-    private int mediaSize;
+    private int slideSize;
     private String tourSource;
+
+    private String picturePath;
+
+    private int photoSampleSize;
+    private String photoSampleSource;
+
+    public String getPicturePath() {
+        return picturePath;
+    }
+
+    public void setPicturePath(String picturePath) {
+        this.picturePath = picturePath;
+    }
+
 
     public TourStop() {
 
     }
 
-    public int getMediaSize() {
-        return this.mediaSize;
+    public String getDescription() {
+        return description;
     }
 
-    public void setMediaSize(int size) {
-        this.mediaSize = size;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+
+    public String getPhotoSampleSource() {
+        return photoSampleSource;
+    }
+
+    public void setPhotoSampleSource(String photoSampleSource) {
+        this.photoSampleSource = photoSampleSource;
+    }
+
+    public int getPhotoSampleSize() {
+        return photoSampleSize;
+    }
+
+    public void setPhotoSampleSize(int photoSampleSize) {
+        this.photoSampleSize = photoSampleSize;
+    }
+
+    public int getSlideSize() {
+        return this.slideSize;
+    }
+
+    public void setSlideSize(int size) {
+        this.slideSize = size;
     }
 
     public void setTourSource(String clipSource) {
@@ -55,6 +93,14 @@ public class TourStop {
 
     public String getName() {
         return this.name;
+    }
+
+    public String getSlidePath(int slideIndex) {
+        return getTourSource() + slideIndex + ".xml";
+    }
+
+    public String getSampleImagePath(int slideIndex) {
+        return getPhotoSampleSource() + slideIndex + ".jpg";
     }
 }
 

@@ -7,6 +7,7 @@ package com.insite.fusebulb.Helpers;
 import android.content.Context;
 
 import com.insite.fusebulb.Support.UserPreference;
+import com.insite.fusebulb.Support.UserPreference.Language;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -25,7 +26,7 @@ public class Downloader {
     public static String HOST_NAME;
     public static String APP_FOLDER = "";
     private static Context context;
-    private static String langPref;
+    private static Language langPref;
     private static NetworkHelper networkHelper;
 
 
@@ -39,12 +40,20 @@ public class Downloader {
     }
 
 
+    public static String getLanguageString(){
+        if(langPref == Language.hi){
+            return "hi";
+        }else{
+            return "en";
+        }
+    }
+
     public static String getHostName(){
-        return "http://phitoor.com/insite/" + langPref +"/";
+        return "http://phitoor.com/insite1/" + getLanguageString() +"/";
     }
 
     public static String getAppFolder(){
-        return context.getFilesDir().toString()+"/insite/" + langPref+"/";
+        return context.getFilesDir().toString()+"/insite/" + getLanguageString()+"/";
     }
 
     public static File getFile(String file_path) {
@@ -84,7 +93,6 @@ public class Downloader {
             }
 
         } catch (final Exception e) {
-            //showError("Error in downloading the file. Please try again");
             e.printStackTrace();
         }
         return file;

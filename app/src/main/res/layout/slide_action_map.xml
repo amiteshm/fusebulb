@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/background_slideAction"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:alpha="0.3"
+            android:background="@drawable/ic_fusebulb" />
+
+        <LinearLayout
+            android:id="@+id/section_slidePrimaryAction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="90dp"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/primary_text_left_right_padding">
+
+            <ImageView
+                android:id="@+id/icon_slidePrimaryAction"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:paddingBottom="8dp"
+                android:src="@drawable/ic_direction_arrow" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/primaryText_slidePrimaryAction"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="8dp"
+                    android:paddingLeft="@dimen/primary_text_left_right_padding"
+                    android:text="Qutub Minar"
+                    android:textColor="@color/primary_text_color"
+                    android:textSize="@dimen/primary_text_size" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:id="@+id/divider_slideAction"
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:layout_below="@id/section_slidePrimaryAction"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="8dp"
+            android:background="#000000" />
+
+        <TextView
+            android:id="@+id/description_slidePrimaryAction"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/test_big_string"
+            android:layout_margin="16dp"
+            android:layout_below="@id/divider_slideAction"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/secondaryText_slidePrimaryAction"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_margin="16dp"
+                android:layout_marginBottom="30dp"
+                android:background="@color/colorAccent"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="Show direction" />
+
+            <Button
+                android:id="@+id/btn_slideSecondaryAction"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:layout_marginBottom="30dp"
+                android:background="#ffffff"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="START" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

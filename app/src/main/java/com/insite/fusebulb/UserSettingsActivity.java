@@ -11,6 +11,7 @@ import android.widget.RadioGroup;
 
 
 import com.insite.fusebulb.Support.UserPreference;
+import com.insite.fusebulb.Support.UserPreference.Language;
 
 
 /**
@@ -34,13 +35,13 @@ public class UserSettingsActivity extends Activity {
 
         languagePref = (RadioGroup) findViewById(R.id.user_language_selector);
         FloatingActionButton doneButton = (FloatingActionButton) findViewById(R.id.save_settings_btn);
-        String userLanguage = userSettings.getUserLanguage(this);
+        Language userLanguage = userSettings.getUserLanguage(this);
 
         if (userLanguage != null) {
-            if (userLanguage.equals(lang_en)) {
+            if (userLanguage == Language.en) {
                 RadioButton b = (RadioButton) findViewById(R.id.language_english);
                 b.setChecked(true);
-            } else if (userLanguage.equals(lang_hi)) {
+            } else if (userLanguage == Language.hi) {
                 RadioButton b = (RadioButton) findViewById(R.id.language_hindi);
                 b.setChecked(true);
             }

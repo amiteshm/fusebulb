@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/background_slideActionCamera"
+            android:layout_width="match_parent"
+            android:alpha="0.3"
+            android:layout_height="match_parent"
+            android:background="@drawable/ic_fusebulb"
+            />
+
+        <LinearLayout
+            android:id="@+id/section_slidePrimaryActionCamera"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/primary_text_left_right_padding"
+            android:layout_marginTop="90dp">
+
+            <ImageView
+                android:id="@+id/icon_slidePrimaryActionCamera"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:paddingBottom="8dp"
+                android:src="@drawable/ic_camera" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/primaryText_slidePrimaryActionCamera"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="8dp"
+                    android:paddingLeft="@dimen/primary_text_left_right_padding"
+                    android:text = "@string/en_take_photos"
+                    android:textColor="@color/primary_text_color"
+                    android:textSize="@dimen/primary_text_size" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:id="@+id/divider_slideAction"
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:layout_below="@id/section_slidePrimaryActionCamera"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="8dp"
+            android:background="#000000" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/primaryBtn_slideActionCamera"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_margin="16dp"
+                android:layout_marginBottom="30dp"
+                android:background="@color/colorAccent"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="See Suggestion" />
+
+            <Button
+                android:id="@+id/btn_slideSecondaryActionCamera"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:layout_marginBottom="30dp"
+                android:background="#ffffff"
+                android:gravity="center"
+                android:padding="8dp"
+                android:text="@string/en_skip_take_photo" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

@@ -31,4 +31,18 @@
 
     <string name="hi_tour_type_attraction">दर्शनीय स्थान</string>
     <string name="hi_tour_type_city_tour">दौरा</string>
+
+    <string name="en_take_photos">Take photos</string>
+    <string name="hi_take_photos">फोटो खिंचे</string>
+
+    <string name="en_see_suggestion">See suggestions</string>
+    <string name="hi_see_suggestion">सुझाव देखें</string>
+
+    <string name="en_show_directions">Show directions</string>
+    <string name="hi_show_directions">रास्ता देखें</string>
+
+    <string name="en_skip_show_direction">Start tour</string>
+    <string name="hi_skip_show_direction">शुरू करें</string>
+    <string name="en_skip_take_photo">Not now</string>
+    <string name="hi_skip_take_photo">अभी नहीं</string>
 </resources>

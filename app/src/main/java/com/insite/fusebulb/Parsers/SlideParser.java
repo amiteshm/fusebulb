@@ -29,11 +29,11 @@ public class SlideParser extends AsyncTask<Void, Integer, Slide> {
     private Context context;
     private Downloader downloader;
     private String slide_source;
-    //private ProgressDialog progDailog;
+    private ProgressDialog progDailog;
 
 
-    public SlideParser(Downloader downloaderHelper, String slide_source_path) {
-        //context = app_context;
+    public SlideParser(Context app_context, Downloader downloaderHelper, String slide_source_path) {
+        context = app_context;
         downloader = downloaderHelper;
         slide_source = slide_source_path;
     }
@@ -58,18 +58,18 @@ public class SlideParser extends AsyncTask<Void, Integer, Slide> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-//        progDailog = new ProgressDialog(context);
-//        progDailog.setMessage("Loading...");
-//        progDailog.setIndeterminate(false);
-//        progDailog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-//        progDailog.setCancelable(true);
-//        progDailog.show();
+        progDailog = new ProgressDialog(context);
+        progDailog.setMessage("Loading...");
+        progDailog.setIndeterminate(false);
+        progDailog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progDailog.setCancelable(true);
+        progDailog.show();
     }
 
     @Override
     protected void onPostExecute(Slide result) {
         super.onPostExecute(result);
-//        progDailog.dismiss();
+        progDailog.dismiss();
 
         //tourRecyclerView.setAdapter(new StopListAdapter(context, result));
     }

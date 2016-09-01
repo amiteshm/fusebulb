@@ -29,6 +29,8 @@
         <activity android:name=".UserSettingsActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             />
-        <activity android:name=".SlideTourActivity"/>
+        <activity android:name=".SlideTourActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            />
     </application>
 </manifest>

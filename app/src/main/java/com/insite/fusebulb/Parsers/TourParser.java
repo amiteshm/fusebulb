@@ -2,15 +2,10 @@ package com.insite.fusebulb.Parsers;
 
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.media.MediaPlayer;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.util.Xml;
 
-import com.insite.fusebulb.Adapters.StopListAdapter;
-import com.insite.fusebulb.Adapters.TourCardAdapter;
 import com.insite.fusebulb.Helpers.Downloader;
-import com.insite.fusebulb.Models.Tour;
 import com.insite.fusebulb.Models.TourStop;
 
 import org.xmlpull.v1.XmlPullParser;
@@ -119,12 +114,20 @@ public class TourParser extends Parser {
             if (tag.equals("name")) {
                 stop.setName(readText(parser));
             } else if (tag.equals("size")) {
-                stop.setMediaSize(Integer.parseInt(readText(parser)));
+                stop.setSlideSize(Integer.parseInt(readText(parser)));
             } else if (tag.equals("location")) {
                 stop.setLocation(parser.getAttributeValue(NS, XML_TOUR_LAT), parser.getAttributeValue(NS, XML_TOUR_LON));
                 parser.nextTag();
+            } else if (tag.equals("description")) {
+                stop.setDescription(readText(parser));
+            } else if (tag.equals("picture")) {
+                stop.setPicturePath(readText(parser));
             } else if (tag.equals("source")) {
                 stop.setTourSource(readText(parser));
+            } else if (tag.equals("photo_sample")) {
+                stop.setPhotoSampleSource(readText(parser));
+            } else if (tag.equals("photo_sample_size")) {
+                stop.setPhotoSampleSize(Integer.parseInt(readText(parser)));
             } else {
                 skip(parser);
             }

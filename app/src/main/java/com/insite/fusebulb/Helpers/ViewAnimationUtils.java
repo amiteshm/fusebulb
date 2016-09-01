@@ -5,8 +5,6 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
 
-import com.insite.fusebulb.Models.SlideView;
-
 /**
  * Created by amiteshmaheshwari on 30/08/16.
  */
