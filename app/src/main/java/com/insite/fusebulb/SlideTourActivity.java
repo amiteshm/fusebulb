@@ -59,11 +59,12 @@ public class SlideTourActivity extends FragmentActivity {
         setContentView(R.layout.activity_slide_tour);
         Bundle extras = getIntent().getExtras();
         tourSourcePath = extras.getString("TOUR_SOURCE");
+        initializeView();
+
     }
 
     protected void onStart() {
         super.onStart();
-        initializeView();
         try {
             TourParser stopsParser = new TourParser(this, tourSourcePath);
             stopsParser.execute();
@@ -76,6 +77,7 @@ public class SlideTourActivity extends FragmentActivity {
 
         tourPlayer = new TourPlayer(stopList);
         tourPlayer.setCurrTour(0);
+
 
     }
 
