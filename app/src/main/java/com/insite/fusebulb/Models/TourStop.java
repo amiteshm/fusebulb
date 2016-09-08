@@ -2,20 +2,45 @@ package com.insite.fusebulb.Models;
 
 import android.location.Location;
 
+import java.util.ArrayList;
+
 /**
  * Created by amiteshmaheshwari on 28/08/16.
  */
 public class TourStop {
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    private int id;
     private String name;
     private String description;
     private Location location;
+
     private int slideSize;
     private String tourSource;
 
     private String picturePath;
 
+    public String getPictureAbsolutePath() {
+        return pictureAbsolutePath;
+    }
+
+    public void setPictureAbsolutePath(String pictureAbsolutePath) {
+        this.pictureAbsolutePath = pictureAbsolutePath;
+    }
+
+    private String pictureAbsolutePath;
+
     private int photoSampleSize;
     private String photoSampleSource;
+
+    private ArrayList<Slide> slideList;
+
 
     public String getPicturePath() {
         return picturePath;
@@ -27,7 +52,7 @@ public class TourStop {
 
 
     public TourStop() {
-
+        slideList = new ArrayList<Slide>();
     }
 
     public String getDescription() {

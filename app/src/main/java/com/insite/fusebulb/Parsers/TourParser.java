@@ -29,6 +29,7 @@ public class TourParser extends Parser {
     private Context context;
     private Downloader downloader;
     private String tour_source;
+    private int tourId;
     private ProgressDialog progDailog;
 
 
@@ -36,6 +37,7 @@ public class TourParser extends Parser {
         context = app_context;
         downloader = new Downloader(context);
         tour_source = tour_source_path;
+        tourId = 0;
     }
 
 
@@ -52,7 +54,6 @@ public class TourParser extends Parser {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         return stopList;
     }
 
@@ -132,6 +133,8 @@ public class TourParser extends Parser {
                 skip(parser);
             }
         }
+        stop.setId(tourId);
+        tourId++;
         return stop;
     }
 }

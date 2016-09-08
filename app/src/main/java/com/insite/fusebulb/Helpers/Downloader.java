@@ -29,7 +29,6 @@ public class Downloader {
     private static Language langPref;
     private static NetworkHelper networkHelper;
 
-
     public Downloader(Context mContext){
         UserPreference userSettings = new UserPreference();
         this.context = mContext;
@@ -49,7 +48,7 @@ public class Downloader {
     }
 
     public static String getHostName(){
-        return "http://phitoor.com/insite1/" + getLanguageString() +"/";
+        return "http://phitoor.com/test/" + getLanguageString() +"/";
     }
 
     public static String getAppFolder(){

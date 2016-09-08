@@ -34,6 +34,7 @@ import java.util.Locale;
 import com.insite.fusebulb.Helpers.Downloader;
 import com.insite.fusebulb.Helpers.ViewAnimationUtils;
 import com.insite.fusebulb.Models.Tour;
+import com.insite.fusebulb.PlayTourActivity;
 import com.insite.fusebulb.R;
 import com.insite.fusebulb.SlideTourActivity;
 import com.insite.fusebulb.Support.UserPreference;
@@ -90,9 +91,7 @@ public class TourCardAdapter extends RecyclerView.Adapter<TourCardAdapter.ViewHo
                 context.startActivity(intent);
             }
         });
-
     }
-
 
     @Override
     public int getItemCount() {
@@ -102,10 +101,8 @@ public class TourCardAdapter extends RecyclerView.Adapter<TourCardAdapter.ViewHo
     public class ViewHolder extends RecyclerView.ViewHolder {
         public ImageView thumbnailImage;
         public TextView titleView;
-
         public ImageView directionBtn;
         public FloatingActionButton tourShowOverViewBtn;
-
         public TextView tourOverView;
 
         public ViewHolder(View view) {
@@ -125,13 +122,14 @@ public class TourCardAdapter extends RecyclerView.Adapter<TourCardAdapter.ViewHo
                     startPlayTourActivity(tour.getTourSource());
                 }
             });
-
         }
     }
 
     private void startPlayTourActivity(String tour_source) {
-        Intent intent = new Intent(context, SlideTourActivity.class);
+        Intent intent = new Intent(context, PlayTourActivity.class);
         intent.putExtra("TOUR_SOURCE", tour_source);
+//        Intent intent = new Intent(context, SlideTourActivity.class);
+//        intent.putExtra("TOUR_SOURCE", tour_source);
         intent.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);

@@ -8,7 +8,6 @@ import android.util.Xml;
 
 import com.insite.fusebulb.Helpers.Downloader;
 import com.insite.fusebulb.Models.Slide;
-import com.insite.fusebulb.Models.TourStop;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -20,9 +19,9 @@ import java.io.InputStream;
 import java.util.ArrayList;
 
 /**
- * Created by amiteshmaheshwari on 28/08/16.
+ * Created by amiteshmaheshwari on 06/09/16.
  */
-public class SlideParser extends AsyncTask<Void, Integer, Slide> {
+public class AllSlideParser extends AsyncTask<Void, Integer, ArrayList<Slide>> {
 
     private static final String TAG = "TourParser";
     protected static final String NS = null;
@@ -32,27 +31,27 @@ public class SlideParser extends AsyncTask<Void, Integer, Slide> {
     private ProgressDialog progDailog;
 
 
-    public SlideParser(Context app_context, Downloader downloaderHelper, String slide_source_path) {
+    public AllSlideParser(Context app_context,  String slide_source_path) {
         context = app_context;
-        downloader = downloaderHelper;
+        downloader = new Downloader(context);
         slide_source = slide_source_path;
     }
 
     @Override
-    protected Slide doInBackground(Void... params) {
+    protected ArrayList<Slide> doInBackground(Void... params) {
         Log.d(TAG, "Downloading file:" + slide_source);
         File cityToursFile = downloader.getFile(slide_source);
-        Slide slide = null;
+        ArrayList<Slide> slides = null;
         try {
             FileInputStream is = new FileInputStream(cityToursFile);
-            slide = parseSlide(is);
+            slides = parseSlides(is);
         } catch (XmlPullParserException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return slide;
+        return slides;
     }
 
     @Override
@@ -67,22 +66,37 @@ public class SlideParser extends AsyncTask<Void, Integer, Slide> {
     }
 
     @Override
-    protected void onPostExecute(Slide result) {
+    protected void onPostExecute(ArrayList<Slide> result) {
         super.onPostExecute(result);
         progDailog.dismiss();
         //tourRecyclerView.setAdapter(new StopListAdapter(context, result));
     }
 
-    public Slide parseSlide(InputStream in) throws XmlPullParserException, IOException {
+    public ArrayList<Slide> parseSlides(InputStream in) throws XmlPullParserException, IOException {
         XmlPullParser parser = Xml.newPullParser();
         parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false);
         parser.setInput(in, null);
         parser.nextTag();
-        return readSlide(parser);
+        return readSlides(parser);
     }
 
 
-
+    public ArrayList<Slide> readSlides(XmlPullParser parser) throws XmlPullParserException, IOException{
+        ArrayList<Slide> slidesList = new ArrayList<>();
+        parser.require(XmlPullParser.START_TAG, NS, "slides");
+        while (parser.next() != XmlPullParser.END_TAG) {
+            if(parser.getEventType() != XmlPullParser.START_TAG) {
+                continue;
+            }
+            String name = parser.getName();
+            if(name.equals("slide")){
+                slidesList.add(readSlide(parser));
+            } else {
+                skip(parser);
+            }
+        }
+        return slidesList;
+    }
 
     public Slide readSlide(XmlPullParser parser) throws XmlPullParserException, IOException {
 

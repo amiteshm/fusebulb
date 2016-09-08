@@ -36,7 +36,6 @@ public class SlideInfoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup vg,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.slide_info, vg, false);
-
         titleView = (TextView) view.findViewById(R.id.slide_info_slideTitle);
         descriptionView = (TextView) view.findViewById(R.id.slide_info_slideDescription);
         backgroundView = (ImageView) view.findViewById(R.id.slide_info_slideBackground);
@@ -47,7 +46,6 @@ public class SlideInfoFragment extends Fragment {
                 transition();
             }
         });
-
         return view;
     }
 
@@ -65,7 +63,6 @@ public class SlideInfoFragment extends Fragment {
             slideDisplayState = DisplayState.BLANK;
         }
     }
-
 
     public void setView(Slide slide, Animation animation){
         titleView.setText(slide.getTitle());

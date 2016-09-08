@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tour_overview_text"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="16dp"
+        android:paddingLeft="@dimen/secondary_text_right_left_padding"
+        android:paddingRight="@dimen/secondary_text_right_left_padding"
+        android:text="@string/test_big_string"
+        android:textSize="@dimen/secondary_text_size" />
+
+</LinearLayout>
