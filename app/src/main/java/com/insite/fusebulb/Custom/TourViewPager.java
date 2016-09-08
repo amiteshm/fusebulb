@@ -34,22 +34,18 @@ public class TourViewPager extends android.support.v4.view.ViewPager {
     }
 
     private void onSwipeOutAtStart() {
-        if (mOnSwipeOutListener!=null) {
+        if (mOnSwipeOutListener != null) {
             mOnSwipeOutListener.onSwipeOutAtStart();
         }
     }
 
     private void onSwipeOutAtEnd() {
-        if (mOnSwipeOutListener!=null) {
+        if (mOnSwipeOutListener != null) {
             mOnSwipeOutListener.onSwipeOutAtEnd();
         }
     }
 
-    private void onSwipeUpDown(){
-        if(mOnSwipeOutListener!=null){
-            mOnSwipeOutListener.onSwipeUpDown();
-        }
-    }
+
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
@@ -62,42 +58,35 @@ public class TourViewPager extends android.support.v4.view.ViewPager {
     }
 
     @Override
-    public boolean onTouchEvent(MotionEvent touchevent){
+    public boolean onTouchEvent(MotionEvent ev){
 
-        switch (touchevent.getAction()) {
-            // when user first touches the screen we get x and y coordinate
-            case MotionEvent.ACTION_DOWN: {
-                x1 = touchevent.getX();
-                y1 = touchevent.getY();
-
-                break;
+        if(getCurrentItem()==0 || getCurrentItem()==getAdapter().getCount()-1){
+            final int action = ev.getAction();
+            float x = ev.getX();
+            switch(action & MotionEventCompat.ACTION_MASK){
+                case MotionEvent.ACTION_MOVE:
+                    break;
+                case MotionEvent.ACTION_UP:
+                    if (getCurrentItem()==0 && x>mStartDragX) {
+                        onSwipeOutAtStart();
+                    }
+                    if (getCurrentItem()==getAdapter().getCount()-1 && x<mStartDragX){
+                        onSwipeOutAtEnd();
+                    }
+                    break;
             }
-            case MotionEvent.ACTION_UP: {
-                x2 = touchevent.getX();
-                y2 = touchevent.getY();
-
-                float deltaX = x2 - x1;
-                float deltaY = y2 - y1;
-
-                float XvsY = Math.abs(deltaX) - Math.abs(deltaY);
-
-                if (getCurrentItem() == 0 && XvsY > 0 && deltaX > MIN_DISTANCE ) {
-                    onSwipeOutAtStart();
-                } else if (getCurrentItem()==getAdapter().getCount()-1 && XvsY > 0 && Math.abs(deltaX) > MIN_DISTANCE) {
-                    onSwipeOutAtEnd();
-                } else if (Math.abs(deltaY) > MIN_DISTANCE) {
-                    onSwipeUpDown();
-                }
-                break;
-            }
+        }else{
+            mStartDragX=0;
         }
-        return false;
+        return super.onTouchEvent(ev);
 
     }
 
+
     public interface OnSwipeOutListener {
         void onSwipeOutAtStart();
+
         void onSwipeOutAtEnd();
-        void onSwipeUpDown();
+
     }
 }
