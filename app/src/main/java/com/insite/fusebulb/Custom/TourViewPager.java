@@ -18,8 +18,8 @@ public class TourViewPager extends android.support.v4.view.ViewPager {
     float mStartDragX;
     float x = 0;
     OnSwipeOutListener mOnSwipeOutListener;
-    float x1, x2, y1, y2;
-    static final int MIN_DISTANCE = 70;
+
+    static final int MIN_DISTANCE = 200;
 
     public TourViewPager(Context context) {
         super(context);
@@ -63,14 +63,15 @@ public class TourViewPager extends android.support.v4.view.ViewPager {
         if(getCurrentItem()==0 || getCurrentItem()==getAdapter().getCount()-1){
             final int action = ev.getAction();
             float x = ev.getX();
+            boolean deltaX = Math.abs(x - mStartDragX) > MIN_DISTANCE;
             switch(action & MotionEventCompat.ACTION_MASK){
                 case MotionEvent.ACTION_MOVE:
                     break;
                 case MotionEvent.ACTION_UP:
-                    if (getCurrentItem()==0 && x>mStartDragX) {
+                    if (getCurrentItem()==0 && x>mStartDragX && deltaX) {
                         onSwipeOutAtStart();
                     }
-                    if (getCurrentItem()==getAdapter().getCount()-1 && x<mStartDragX){
+                    if (getCurrentItem()==getAdapter().getCount()-1 && x<mStartDragX && deltaX){
                         onSwipeOutAtEnd();
                     }
                     break;
